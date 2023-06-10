@@ -1,0 +1,1276 @@
+﻿Build1=Default,com.clenontec.webbrowser,Premium
+File1=Main_Layout.bal
+FileGroup1=Default Group
+Group=Default Group
+IconFile=
+Library1=core
+Library10=stringutils
+Library11=webviewxtended
+Library12=webviewextras
+Library13=webviewsettings
+Library14=clipboard
+Library2=javaobject
+Library3=phone
+Library4=runtimepermissions
+Library5=downloadmanager
+Library6=randomaccessfile
+Library7=reflection
+Library8=okhttp
+Library9=sql
+ManifestCode=AddPermission(android.permission.WRITE_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.WRITE_INTERNAL_STORAGE)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.READ_EXTERNAL_STORAGE)~\n~AddPermission(android.permission.INTERNET)~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="29"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetActivityAttribute(main, android:hardwareAccelerated, "True")~\n~SetActivityAttribute(Main, android:configChanges,"orientation|keyboardHidden|screenSize")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:largeHeap,"True")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~~\n~'FROM_FILE_UPLOADER~\n~AddApplicationText(~\n~  <provider~\n~  android:name="android.support.v4.content.FileProvider"~\n~  android:authorities="$PACKAGE$.provider"~\n~  android:exported="false"~\n~  android:grantUriPermissions="true">~\n~  <meta-data~\n~  android:name="android.support.FILE_PROVIDER_PATHS"~\n~  android:resource="@xml/provider_paths"/>~\n~  </provider>~\n~)~\n~CreateResource(xml, provider_paths,~\n~   <files-path name="name" path="shared" />~\n~)~\n~~\n~'End Of Default Mainfst~\n~~\n~'Extra Mainfest Data~\n~~\n~CreateResource(values, colors.xml,~\n~<resources>~\n~    <color name="actionbar">#ffffff</color>~\n~	<color name="statusbar">#111111</color>~\n~	<color name="textColorPrimary">#555555</color>~\n~	<color name="navigationBar">#111111</color>~\n~</resources>~\n~)~\n~CreateResource(values-v20, theme.xml,~\n~<resources>~\n~    <style name="LightTheme" parent="@android:style/Theme.Material.Light">~\n~		 <item name="android:colorPrimary">@color/actionbar</item>~\n~		 <item name="android:colorPrimaryDark">@color/statusbar</item>~\n~		 <item name="android:textColorPrimary">@color/textColorPrimary</item>~\n~		 <item name="android:navigationBarColor">@color/navigationBar</item>~\n~    </style>~\n~</resources>~\n~)~\n~CreateResource(values-v14, theme.xml,~\n~<resources>~\n~    <style name="LightTheme" parent="@android:style/Theme.Holo.Light">~\n~		<item name="android:actionBarStyle">@style/CustomActionBarStyle</item>~\n~    </style>~\n~	<style name="CustomActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">~\n~	    <item name="android:background">@color/actionbar</item>~\n~	</style>~\n~</resources>~\n~)~\n~CreateResource(xml, provider_paths,~\n~   <files-path name="name" path="shared" />~\n~)~\n~
+Module1=Starter
+Module2=FileProvider
+Module3=DownloaderService
+Module4=Utils
+Module5=StateManager
+NumberOfFiles=1
+NumberOfLibraries=14
+NumberOfModules=5
+Version=9.3
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Frigate Browser
+	#VersionCode: 1
+	#VersionName: Frigate One Tab Browser v1
+	#SupportedOrientations: Portrait
+	#CanInstallToExternalStorage: True
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+
+Sub Process_Globals
+'Dim incog_timer As Timer
+	'incog_timer.Initialize("incog_timer",1000)
+'	incog_timer.Enabled=False
+	
+	Private cc As ContentChooser
+End Sub
+
+Sub Globals
+	'MAIN_PANEL
+	Private main_webview As WebView
+	Private Main_Panel As Panel
+	
+
+	'NAVIGATION_PANEL
+	Private Panel_Navigation_Bar As Panel
+	Private btn_drawer As Button
+	Private btn_home As Button
+	Private btn_fowrd As Button
+	Private btn_back As Button
+	
+	'SEARCHBAR_PANEL
+	Private Panel_Search_Bar As Panel
+	Private btn_search As Button
+	Private textbox_search_bar As AutoCompleteEditText
+	Private btn_refresh As Button
+	
+	'DRAWER_PANEL
+	Private Panel_Drawer As Panel
+	Private btn_appexit As Button
+	Private btn_shareapp As Button
+	Private btn_helpguide As Button
+	Private btn_appsettingsmore As Button
+	Private btn_readingfullscreenmode As Button
+	Private btn_darkmode As Button
+	Private btn_downloader As Button
+	Private btn_shareweburl As Button
+	Private btn_imagedisable As Button
+	Private btn_openweblinkanotherbrowser As Button
+	Private btn_screenshot As Button
+	Private btn_intergrton As Button
+	Private btn_clearalldataapp As Button
+	Private btn_batterysaver As Button
+	Private btn_jsdisable As Button
+	Private btn_zoomenabled As Button
+	
+	'INTERGRATION_PANEL
+	Private Panel_Intergration As Panel
+	Private btn_extrasites As Button
+	Private btn_panel_intergration_hide As Button
+	Private btn_soundcloud As Button
+	Private btn_youtube As Button
+	Private btn_snpcht As Button
+	Private btn_telgrm As Button
+	Private btn_rddit As Button
+	Private btn_pintrst As Button
+	Private btn_lnkdin As Button
+	Private btn_twttr As Button
+	Private btn_fb As Button
+	Private btn_instr As Button
+	Private btn_ytgames As Button
+	Private btn_quora As Button
+	
+	'DOWNLOADER_PANEL
+	Private Panel_Downloader As Panel
+	Private btn_hidedownloadpanel As Button
+	Private btn_startdownload As Button
+	Private textbox_download_filename As AutoCompleteEditText
+	Private textbox_download_url As AutoCompleteEditText
+	Private lbl_paneldownload_head As Label
+	Private Panel_Downloader_Header_Color As Panel
+	Private btn_downloadbooster_panel As CheckBox
+
+	'FULLSCREEN_PANEL
+	Private WebView_ReadingFullScreen_Mode As WebView
+	Private btn_fullscreenreadingmode_exit As Button
+	Private btn_fullscreen_fowrd As Button
+	Private btn_fullscreen_back As Button
+	
+	'SETTINGS_PANEL
+	Private Button_applock As Button
+	Private Button_exportdata As Button
+	Private LBL_SEARCHENGINE As Label
+	Private RadioButton_google As RadioButton
+	Private RadioButton_duck As RadioButton
+	Private lbl_sitesecurity As Label
+	Private CheckBox_savepass As CheckBox
+	Private CheckBox_dnt As CheckBox
+	Private lbl_sitesetting As Label
+	Private CheckBox_js As CheckBox
+	Private CheckBox_boostmode As CheckBox
+	Private CheckBox_cookie As CheckBox
+	Private RadioButton_bing As RadioButton
+	Private RadioButton_yahoo As RadioButton
+	Private CheckBox_safesearch As CheckBox
+	
+	Private Panel_applock_settings As Panel
+	Private TextBox_applock_password_set As AutoCompleteEditText
+	Private lbl_passcodelock As Label
+	Private lbl_passcode_info As Label
+	Private CheckBox_applock_enable As CheckBox
+	Private btn_applocksave As Button	
+	Private btn_password_panelHide As Button
+	Private Textbox_retype_passcodepleteEditText1 As AutoCompleteEditText
+	
+	Private Button_history As Button
+	Private Panel_Settings_History As Panel
+	
+	'APPLOCK_PANEL
+	Private Panel_App_Lock As Panel
+	Private lbl_applock_hint As Label
+	Private ImageView_applocker As ImageView
+	Private Txtbox_applock_text As AutoCompleteEditText
+		
+	'HIDE_BUTTONS_PANEL
+	Private ToggleButton_drawer As ToggleButton
+	
+	
+	'OTHERS
+	Dim DownloadManager1 As DownloadManager
+	Private PANEL_HIDE_BUTTONS As Panel
+	Private rpa As RuntimePermissions
+	Private ToggleButton_imagedisable As ToggleButton
+	Private ToggleButtonNightmode As ToggleButton
+	Dim WebViewExtender As WebViewXtender
+	Dim WebViewSettings As WebViewSettings
+	Dim webviewextras As WebViewExtras
+	Private Panel_WebView_ReadingFullScreen_Mode As Panel
+	Private Panel_Main_Settings As Panel
+	Private btn_pannelsettings_reset As Button
+	Private btn_settingspanel_okandhide As Button	
+	Private ToggleButtonIncog As ToggleButton
+	
+	Private btn_refreshclose As Button
+	Private btn_urlplus As Button
+	Private btn_runappbackground As Button
+	
+	Private ToggleButton_js As ToggleButton
+	Private ToggleButton_bttrysave As ToggleButton
+	
+	Private btn_history_hide As Button
+	Private ListView_Settings_hostory As ListView
+	Private btn_clearHistory As Button
+	Private lbl_applockpagedata As Label
+	
+	Private ToggleButton_zoomenbl As ToggleButton
+	
+	
+End Sub
+
+Sub incog_timer_tick
+	WebViewSettings.setSaveFormData(main_webview,False)
+	WebViewSettings.setSavePassword(main_webview,False)
+	WebViewSettings.setSaveFormData(WebView_ReadingFullScreen_Mode,False)
+	WebViewSettings.setSavePassword(WebView_ReadingFullScreen_Mode,False)
+End Sub
+Sub run_incog_timer_tick
+	WebViewSettings.setSaveFormData(main_webview,False)
+	WebViewSettings.setSavePassword(main_webview,False)
+	WebViewSettings.setSaveFormData(WebView_ReadingFullScreen_Mode,False)
+	WebViewSettings.setSavePassword(WebView_ReadingFullScreen_Mode,False)
+End Sub
+
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("Main_Layout")
+	Txtbox_applock_text.Color=Colors.Transparent
+	
+	main_webview.LoadUrl("file:///android_asset/welcome.html")
+	
+	'SETTINGS_INFORMAIONS
+	Try
+		If File.ReadString(File.DirDefaultExternal,"pscodecheck.txt")="1" Then
+			Panel_App_Lock.BringToFront
+			Panel_App_Lock.Visible=True
+			CheckBox_applock_enable.Checked=True
+		Else
+			Panel_App_Lock.Visible=False
+			CheckBox_applock_enable.Checked=False
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"google.txt")="1" Then
+			RadioButton_google.Checked=True			
+		Else
+			RadioButton_google.Checked=False			
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"duck.txt")="1" Then
+			RadioButton_duck.Checked=True			
+		Else
+			RadioButton_duck.Checked=False			
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"bing.txt")="1" Then
+			RadioButton_bing.Checked=True			
+		Else
+			RadioButton_bing.Checked=False			
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"yahoo.txt")="1" Then
+			RadioButton_yahoo.Checked=True			
+		Else
+			RadioButton_yahoo.Checked=False
+		End If
+		
+		Try
+			
+		If RadioButton_google.Checked=True Then
+			main_webview.LoadUrl("file:///android_asset/google.html")
+		End If
+		If RadioButton_duck.Checked=True Then
+			main_webview.LoadUrl("file:///android_asset/duck.html")
+		End If 
+		If RadioButton_bing.Checked=True Then
+			main_webview.LoadUrl("file:///android_asset/bing.html")
+		End If
+		If RadioButton_yahoo.Checked=True Then
+			main_webview.LoadUrl("file:///android_asset/yahoo.html")
+		End If
+		Catch
+			Log(LastException)
+			main_webview.LoadUrl("file:///android_asset/google.html")
+		End Try
+		
+		
+		If File.ReadString(File.DirDefaultExternal,"savepass.txt")="1" Then
+			CheckBox_savepass.Checked=True
+			WebViewSettings.setSaveFormData(main_webview,True)
+			WebViewSettings.setSavePassword(main_webview,True)
+			WebViewSettings.setSaveFormData(WebView_ReadingFullScreen_Mode,True)
+			WebViewSettings.setSavePassword(WebView_ReadingFullScreen_Mode,True)
+		Else
+			CheckBox_savepass.Checked=False
+			WebViewSettings.setSaveFormData(main_webview,False)
+			WebViewSettings.setSavePassword(main_webview,False)
+			WebViewSettings.setSaveFormData(WebView_ReadingFullScreen_Mode,False)
+			WebViewSettings.setSavePassword(WebView_ReadingFullScreen_Mode,False)
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"dnt.txt")="1" Then
+			CheckBox_dnt.Checked=True
+		Else
+			CheckBox_dnt.Checked=False
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"js.txt")="1" Then
+			CheckBox_js.Checked=True
+			main_webview.JavaScriptEnabled=True
+			WebView_ReadingFullScreen_Mode.JavaScriptEnabled=True
+			WebViewSettings.setJavaScriptCanOpenWindowsAutomatically(main_webview,True)
+			WebViewSettings.setJavaScriptCanOpenWindowsAutomatically(Panel_WebView_ReadingFullScreen_Mode,True)
+		Else
+			CheckBox_js.Checked=False
+			main_webview.JavaScriptEnabled=False
+			WebViewSettings.setJavaScriptCanOpenWindowsAutomatically(main_webview,False)
+			WebViewSettings.setJavaScriptCanOpenWindowsAutomatically(Panel_WebView_ReadingFullScreen_Mode,False)
+			WebView_ReadingFullScreen_Mode.JavaScriptEnabled=False
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"boostr.txt")="1" Then
+			CheckBox_boostmode.Checked=True
+		Else
+			CheckBox_boostmode.Checked=False
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"cookie.txt")="1" Then
+			CheckBox_cookie.Checked=True
+			WebViewExtender.getAcceptCookie(main_webview)
+			WebViewExtender.getAcceptCookie(WebView_ReadingFullScreen_Mode)
+		Else
+			CheckBox_cookie.Checked=False
+		End If
+		
+		If File.ReadString(File.DirDefaultExternal,"sfsearch.txt")="1" Then
+			CheckBox_safesearch.Checked=True
+		Else
+			CheckBox_safesearch.Checked=False
+		End If
+		
+		
+		
+	Catch
+		Log(LastException)
+	End Try
+	
+Try
+		If File.Exists(File.DirDefaultExternal,"history.txt") =False Then
+			File.WriteString(File.DirDefaultExternal,"history.txt","")
+			Else
+				
+		End If
+Catch
+	Log(LastException)
+End Try
+	
+	
+	webviewextras.addWebChromeClient(main_webview,True)
+
+	ListView_Settings_hostory.FastScrollEnabled=True
+	'assuming that we need to read some global settings we can use:
+	
+	'Dim AutoUpdate As Boolean = StateManager.GetSetting2("AutoUpdate",False) 'ignore
+	
+	'Later if the user changes this setting we can call: StateManager.SetSetting("AutoUpdate", ...)
+	
+	'WEBIEW_UPLOAD
+	Dim client As JavaObject
+	client.InitializeNewInstance(Application.PackageName & ".main$MyChromeClient", Null)
+	Dim jo As JavaObject = main_webview
+	jo.RunMethod("setWebChromeClient", Array(client))
+	
+	'COLOR_TRANSPARENT
+	main_webview.Color=Colors.Transparent
+	WebView_ReadingFullScreen_Mode.Color=Colors.Transparent
+	
+	btn_batterysaver.Color=Colors.Transparent
+	btn_jsdisable.Color=Colors.Transparent
+	btn_ytgames.Color=Colors.Transparent
+	btn_quora.Color=Colors.Transparent
+	btn_zoomenabled.Color=Colors.Transparent
+	btn_fullscreenreadingmode_exit.Color=Colors.Transparent
+	btn_refreshclose.Color=Colors.Transparent
+	btn_fullscreen_fowrd.Color=Colors.Transparent
+	btn_fullscreen_back.Color=Colors.Transparent
+	btn_appexit.Color=Colors.Transparent
+	btn_runappbackground.Color=Colors.Transparent
+	btn_urlplus.Color=Colors.Transparent
+	btn_appsettingsmore.Color=Colors.Transparent
+	btn_back.Color=Colors.Transparent
+	btn_darkmode.Color=Colors.Transparent
+	btn_downloader.Color=Colors.Transparent
+	btn_drawer.Color=Colors.Transparent
+	btn_extrasites.Color=Colors.Transparent
+	btn_fb.Color=Colors.Transparent
+	btn_fowrd.Color=Colors.Transparent
+	btn_helpguide.Color=Colors.Transparent
+	btn_hidedownloadpanel.Color=Colors.Transparent
+	btn_home.Color=Colors.Transparent
+	btn_imagedisable.Color=Colors.Transparent
+	btn_instr.Color=Colors.Transparent
+	btn_intergrton.Color=Colors.Transparent
+	btn_lnkdin.Color=Colors.Transparent
+	btn_openweblinkanotherbrowser.Color=Colors.Transparent
+	btn_panel_intergration_hide.Color=Colors.Transparent
+	btn_pintrst.Color=Colors.Transparent
+	btn_rddit.Color=Colors.Transparent
+	btn_readingfullscreenmode.Color=Colors.Transparent
+	btn_refresh.Color=Colors.Transparent
+	btn_screenshot.Color=Colors.Transparent
+	btn_search.Color=Colors.Transparent
+	btn_shareapp.Color=Colors.Transparent
+	btn_shareweburl.Color=Colors.Transparent
+	btn_snpcht.Color=Colors.Transparent
+	btn_soundcloud.Color=Colors.Transparent
+	btn_startdownload.Color=Colors.Transparent
+	btn_telgrm.Color=Colors.Transparent
+	btn_twttr.Color=Colors.Transparent
+	btn_youtube.Color=Colors.Transparent
+	btn_clearalldataapp.Color=Colors.Transparent
+	
+	textbox_download_filename.Color=Colors.Transparent
+	textbox_download_url.Color=Colors.Transparent
+	textbox_search_bar.Color=Colors.Transparent
+	
+	lbl_paneldownload_head.Color=Colors.Transparent
+	
+	
+	
+End Sub
+
+Sub Activity_Resume
+	Try
+		For Each permission As String In Array(rpa.PERMISSION_READ_EXTERNAL_STORAGE, rpa.PERMISSION_WRITE_EXTERNAL_STORAGE)
+			rpa.CheckAndRequest(permission)
+			wait for Activity_PermissionResult (permission As String, result As Boolean)
+			File.MakeDir(File.DirRootExternal,"/Frigate")
+			File.MakeDir(File.DirRootExternal,"/Frigate/Download")
+			File.MakeDir(File.DirRootExternal,"/Frigate/ScreenShots")
+			File.MakeDir(File.DirRootExternal,"/Frigate/Log")
+			If result=False Then
+			
+				Return
+			End If
+		Next
+	Catch
+		Log(LastException)
+	End Try
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+	'Try
+	'	If UserClosed Then
+	'	StateManager.ResetState("Main")
+	'Else
+	'	StateManager.SaveState(Activity, "Main")
+	'End If
+	'StateManager.SaveSettings
+	'Catch
+	'	Log(LastException)
+	'End Try
+	
+End Sub
+
+'WEBVIEW_UPLOAD
+Sub ShowFile_Chooser (FilePathCallback As Object, FileChooserParams As Object)
+	cc.Initialize("CC")
+	cc.Show("*/*", "Choose File")
+	Wait For CC_Result (Success As Boolean, Dir As String, FileName As String)
+	Dim jo As JavaObject = Me
+	If Success Then
+		Log(FileName)
+	File.Copy(Dir, FileName, Starter.Provider.SharedFolder, "TempFile")
+		jo.RunMethod("SendResult", Array(Starter.Provider.GetFileUri("TempFile"), FilePathCallback))
+	Else
+		jo.RunMethod("SendResult", Array(Null, FilePathCallback))
+	End If
+End Sub
+#if Java
+import android.webkit.*;
+import android.webkit.WebChromeClient.*;
+import android.net.*;
+public static void SendResult(Uri uri, ValueCallback<Uri[]> filePathCallback) {
+	if (uri != null)
+		filePathCallback.onReceiveValue(new Uri[] {uri});
+	else
+		filePathCallback.onReceiveValue(null);
+		
+}
+public static class MyChromeClient extends WebChromeClient {
+@Override
+ public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback,
+            FileChooserParams fileChooserParams) {
+		processBA.raiseEventFromUI(this, "showfile_chooser", filePathCallback, fileChooserParams);
+        return true;
+    }
+	}
+#End If
+
+'NAVIGATION_PANEL
+Sub btn_drawer_Click
+	If ToggleButton_drawer.Checked=True Then
+		ToggleButton_drawer.Checked=False
+		Panel_Drawer.BringToFront
+		Panel_Drawer.Visible=True
+		Panel_Intergration.Visible=False
+		Panel_Downloader.Visible=False
+		Else
+		ToggleButton_drawer.Checked=True
+		Panel_Drawer.Visible=False
+	End If
+End Sub
+Sub btn_back_Click
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+	main_webview.Back
+End Sub
+Sub btn_fowrd_Click
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+	main_webview.Forward
+End Sub
+Sub btn_home_Click
+	Try
+	If RadioButton_google.Checked=True Then
+	main_webview.LoadUrl("file:///android_asset/google.html")
+	End If
+	If RadioButton_duck.Checked=True Then
+	main_webview.LoadUrl("file:///android_asset/duck.html")
+	End If
+	If RadioButton_bing.Checked=True Then
+	main_webview.LoadUrl("file:///android_asset/bing.html")
+	End If
+	If RadioButton_yahoo.Checked=True Then
+	main_webview.LoadUrl("file:///android_asset/yahoo.html")
+	End If
+	Catch
+	Log(LastException)
+	main_webview.LoadUrl("file:///android_asset/google.html")
+	End Try
+End Sub
+Sub btn_runappbackground_Click
+	
+End Sub
+
+'DRAWER_PANEL
+Sub btn_intergrton_Click
+	Panel_Intergration.BringToFront
+	Panel_Intergration.Visible=True
+	Panel_Drawer.Visible=False
+	ToggleButton_drawer.Checked=True
+End Sub
+Sub btn_batterysaver_Click
+	If ToggleButton_bttrysave.Checked=True Then
+		
+		ToggleButton_bttrysave.Checked=False
+		btn_readingfullscreenmode.Enabled=False
+		btn_screenshot.Enabled=False
+		btn_downloadbooster_panel.Enabled=False
+		
+		
+			
+		btn_batterysaver.TextColor=Colors.RGB(221,74,113)
+		
+		ToastMessageShow("Disable : Reading Mode | Screenshot | Download Booster Service " & CRLF& CRLF & "Application Animations Disable"& CRLF & CRLF &"Battry Save TurnON",True)
+	Else
+			
+	
+		btn_batterysaver.TextColor=Colors.RGB(85,85,85)
+		btn_downloadbooster_panel.Enabled=True
+		ToggleButton_bttrysave.Checked=True
+		btn_readingfullscreenmode.Enabled=True
+		btn_screenshot.Enabled=True
+		ToastMessageShow("All disable services : Enable" & CRLF& CRLF &"Battry Save TurnOFF",True)
+
+	End If
+End Sub
+
+Sub btn_jsdisable_Click
+	If ToggleButton_js.Checked=True Then
+		main_webview.JavaScriptEnabled=False
+		WebViewExtender.setJavaScriptEnabled(main_webview,False)
+		ToggleButton_js.Checked=False
+		ToastMessageShow("Little Ad Blocker  : Enable ( Classic Interface Enable )",True)
+	Else
+		main_webview.JavaScriptEnabled=True
+		WebViewExtender.setJavaScriptEnabled(main_webview,True)
+		ToggleButton_js.Checked=True
+		ToastMessageShow("Little Ad Blocker : Disable ( Classic Interface Disable )",True)
+	End If
+	
+End Sub
+Sub btn_helpguide_LongClick
+	main_webview.LoadUrl("file:///android_asset/welcome.html")
+End Sub
+Sub btn_screenshot_Click
+	Panel_Downloader.Visible=False
+	Panel_Drawer.Visible=False
+	Panel_Drawer.Visible=False
+	ToggleButton_drawer.Checked=True
+	Try
+		Dim M, H, S As String
+		DateTime.DateFormat="dd mm yyyy"
+		H  = DateTime.GetHour(DateTime.Now)
+		M  = DateTime.GetMinute(DateTime.Now)
+		S = DateTime.GetSecond(DateTime.Now)
+		
+		Dim Obj1, Obj2 As Reflector
+		Dim bmp As Bitmap
+		Dim cvs As Canvas
+		Obj1.Target = Obj1.GetActivityBA
+		Obj1.Target = Obj1.GetField("vg")
+		bmp.InitializeMutable(Activity.Width, Activity.Height)
+		cvs.Initialize2(bmp)
+		Dim args(1) As Object
+		Dim types(1) As String
+		Obj2.Target = cvs
+		Obj2.Target = Obj2.GetField("canvas")
+		args(0) = Obj2.Target
+		types(0) = "android.graphics.Canvas"
+		Obj1.RunMethod4("draw", args, types)
+		Dim Out As OutputStream
+		Out = File.OpenOutput(File.DirRootExternal & "/Frigate/ScreenShots", H & ":"& M & S & DateTime.Date(DateTime.Now) &"-frigate_Screenshot.Png", False)
+		bmp.WriteToStream(Out, 100, "PNG")
+		Out.Close
+		ToastMessageShow("ScreenShot Capture Successfull ! ",True)
+	Catch
+		Log(LastException)		
+		
+		If Msgbox2("Directory Unavailable or STORAGE PERMISSION denied !"& CRLF & CRLF & "Get Permission : Open Settings > Apps > Configure Apps > App Permissions > Storage > Frigate Browser","READ CAREFULLY","Open Settings","","No",Null)=DialogResponse.POSITIVE Then
+			Dim DoIntent As Intent
+			DoIntent.Initialize("android.settings.MANAGE_APPLICATIONS_SETTINGS", "")
+			StartActivity(DoIntent)
+		Else
+		End If
+	End Try
+End Sub
+Sub btn_imagedisable_Click
+	Panel_Drawer.Visible=False
+	ToggleButton_drawer.Checked=True
+	
+	If ToggleButton_imagedisable.Checked = True Then
+		WebViewExtender.setLoadsImagesAutomatically(main_webview,False)
+		ToggleButton_imagedisable.Checked = False
+		btn_imagedisable.TextColor = Colors.RGB(221,74,113)
+		ToastMessageShow("Block Images : DATA Save Enable",True)
+		Else
+		WebViewExtender.setLoadsImagesAutomatically(main_webview,True)
+		ToggleButton_imagedisable.Checked = True
+		btn_imagedisable.TextColor = Colors.RGB(85,85,85)
+		ToastMessageShow("Show Images : DATA Save Disable",True)
+	End If
+End Sub
+Sub btn_openweblinkanotherbrowser_Click
+	
+	If main_webview.Url.StartsWith("file:///") Then
+		ToastMessageShow("Can't open URL",True)
+		Else
+			Try
+		Private openurlsharei As Intent
+			openurlsharei.Initialize(openurlsharei.ACTION_VIEW,main_webview.Url)
+			StartActivity(openurlsharei)
+	Catch
+		Log(LastException)
+	End Try
+	End If
+	
+End Sub
+Sub btn_shareweburl_Click
+	
+	If main_webview.Url.StartsWith("file:///") Then
+		ToastMessageShow("Sharing Faild !",True)
+	Else
+		Try
+			Dim shareweburlpk As Intent
+		shareweburlpk.Initialize(shareweburlpk.ACTION_SEND,"")
+		shareweburlpk.SetType("text/plain")
+			shareweburlpk.PutExtra("android.intent.extra.TEXT","URL ( Share ) : " & main_webview.Url & CRLF &  CRLF & "Make hard things simple. Lite Browser with Lightning Speed and Mini Usage. Get it on Google Play Now. http://play.google.com/store/apps/details?id=com.clenontec.webbrowser")
+		shareweburlpk.WrapAsIntentChooser("URL Sharing Service")
+		StartActivity(shareweburlpk)
+		Catch
+			Log(LastException)
+		End Try
+		
+	End If
+
+	
+End Sub
+Sub btn_downloader_Click
+	Panel_Downloader.BringToFront
+	Panel_Drawer.Visible=False
+	Panel_Downloader.Visible=True
+	Panel_Drawer.Visible=False
+	ToggleButton_drawer.Checked=True
+End Sub
+Sub btn_darkmode_Click
+	If ToggleButtonNightmode.Checked=True Then
+		Panel_Downloader.Color=Colors.RGB(18,18,18)
+		Panel_Drawer.Color=Colors.RGB(18,18,18)
+		Panel_Intergration.Color=Colors.RGB(18,18,18)
+		Panel_Navigation_Bar.Color=Colors.RGB(18,18,18)
+		Panel_Search_Bar.Color=Colors.RGB(18,18,18)
+		main_webview.Color=Colors.Black
+		Panel_WebView_ReadingFullScreen_Mode.Color=Colors.RGB(18,18,18)
+		WebView_ReadingFullScreen_Mode.Color=Colors.Black
+		ToggleButtonNightmode.Checked=False
+		btn_back.TextColor=Colors.White
+		btn_fowrd.TextColor=Colors.White
+		btn_home.TextColor=Colors.White
+		btn_drawer.TextColor=Colors.White
+		textbox_search_bar.TextColor=Colors.White
+		textbox_search_bar.HintColor=Colors.White
+		
+		btn_darkmode.TextColor=Colors.RGB(221,74,113)
+		
+		
+		Else
+			
+		ToggleButtonNightmode.Checked=True
+		Panel_Downloader.Color=Colors.White
+		Panel_Drawer.Color=Colors.White
+		Panel_Intergration.Color=Colors.White
+		Panel_Navigation_Bar.Color=Colors.White
+		Panel_Search_Bar.Color=Colors.White
+		main_webview.Color=Colors.White
+		Panel_WebView_ReadingFullScreen_Mode.Color=Colors.White
+		WebView_ReadingFullScreen_Mode.Color=Colors.White
+		
+		btn_back.TextColor=Colors.RGB(85,85,85)
+		btn_fowrd.TextColor=Colors.RGB(85,85,85)
+		btn_home.TextColor=Colors.RGB(85,85,85)
+		btn_drawer.TextColor=Colors.RGB(85,85,85)
+		btn_darkmode.TextColor=Colors.RGB(85,85,85)
+		textbox_search_bar.TextColor=Colors.RGB(85,85,85)
+		textbox_search_bar.HintColor=Colors.RGB(85,85,85)
+	End If
+End Sub
+Sub btn_zoomenabled_Click
+	If ToggleButton_zoomenbl.Checked=True Then
+		btn_zoomenabled.TextColor=Colors.RGB(221,74,113)
+		main_webview.ZoomEnabled=True
+		WebViewSettings.setDisplayZoomControls(main_webview,False)
+		WebView_ReadingFullScreen_Mode.ZoomEnabled=True
+		WebViewSettings.setDisplayZoomControls(WebView_ReadingFullScreen_Mode,False)
+		ToggleButton_zoomenbl.Checked=False
+		ToastMessageShow("Zoom Enabled !",True)
+		Else
+		ToastMessageShow("Zoom Disable !",True)
+		WebViewSettings.setDisplayZoomControls(main_webview,False)
+		btn_zoomenabled.TextColor=Colors.RGB(85,85,85)
+		main_webview.ZoomEnabled=False
+		WebView_ReadingFullScreen_Mode.ZoomEnabled=False
+		WebViewSettings.setDisplayZoomControls(WebView_ReadingFullScreen_Mode,False)
+		ToggleButton_zoomenbl.Checked=True
+	End If
+End Sub
+Sub btn_readingfullscreenmode_Click
+	Panel_Drawer.Visible=False
+	ToggleButton_drawer.Checked=True
+	Panel_WebView_ReadingFullScreen_Mode.BringToFront
+	Panel_WebView_ReadingFullScreen_Mode.Visible=True
+	WebView_ReadingFullScreen_Mode.LoadUrl(main_webview.Url)
+End Sub
+Sub btn_shareapp_Click
+	Try
+		Dim shareapk As Intent
+	shareapk.Initialize(shareapk.ACTION_SEND,"")
+	shareapk.SetType("text/plain")
+		shareapk.PutExtra("android.intent.extra.TEXT","Make hard things simple. Lite Browser with Lightning Speed and Mini Usage."& CRLF &  CRLF &"Data Save / Battery Save / Smart Search / Smart and High-Speed and Unlimited Downloader / Media Integration / Night Mode / 100% Security / Social Media Integration....."& CRLF &  CRLF &"Get it on Google Play Now. http://play.google.com/store/apps/details?id=com.clenontec.webbrowser")
+	shareapk.WrapAsIntentChooser("Share Frigate Browser")
+	StartActivity(shareapk)
+	Catch
+		Log(LastException)
+	End Try
+	
+End Sub
+Sub btn_appexit_Click
+	'Try
+	'	
+'		StateManager.ResetState("Main")
+'		StateManager.SaveState(Activity, "Main")
+'	StateManager.SaveSettings
+'	Catch
+''		Log(LastException)
+'	End Try
+'	
+
+	Activity.Finish
+
+End Sub
+Sub btn_clearalldataapp_Click
+	If ToggleButtonIncog.Checked=True Then
+		btn_clearalldataapp.TextColor=Colors.RGB(221,74,113)
+		ToggleButtonIncog.Checked=False
+		WebViewExtender.clearCache(main_webview,True)
+	WebViewExtender.clearFocus(main_webview)
+	WebViewSettings.setSaveFormData(main_webview,False)
+	WebViewSettings.setSavePassword(main_webview,False)
+	'	incog_timer.Enabled=True
+	Else
+		btn_clearalldataapp.TextColor=Colors.RGB(85,85,85)
+		ToggleButtonIncog.Checked=True
+		WebViewExtender.clearCache(main_webview,False)
+		WebViewSettings.setSaveFormData(main_webview,True)
+		WebViewSettings.setSavePassword(main_webview,True)
+'		incog_timer.Enabled=False
+	End If
+	
+	
+End Sub
+Sub btn_appsettingsmore_Click
+	Panel_Drawer.Visible=False
+	ToggleButton_drawer.Checked=True
+	Panel_Main_Settings.BringToFront
+	Panel_Main_Settings.Visible=True
+End Sub
+Sub btn_helpguide_Click
+	Panel_Drawer.Visible=False
+	ToggleButton_drawer.Checked=True
+	Try
+		Dim feedback As Email
+		feedback.To.Add("contact.clenontec@gmail.com")
+		feedback.Subject="Help and Feedback - Frigate Suffering Browser"
+		StartActivity(feedback.GetIntent)
+	Catch
+		Log(LastException)
+		ToastMessageShow("Help and Feedback Fail !",True)
+	End Try
+End Sub
+
+'PANEL_INTERGRATION
+Sub btn_instr_Click
+	main_webview.LoadUrl("https://www.instagram.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_ytgames_Click
+	main_webview.LoadUrl("https://m.youtube.com/gaming/")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+
+Sub btn_quora_Click
+	main_webview.LoadUrl("https://quora.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_fb_Click
+	main_webview.LoadUrl("https://m.facebook.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_lnkdin_Click
+	main_webview.LoadUrl("https://www.linkedin.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_twttr_Click
+	main_webview.LoadUrl("https://twitter.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_pintrst_Click
+	main_webview.LoadUrl("https://www.pinterest.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_rddit_Click
+	main_webview.LoadUrl("https://www.reddit.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_telgrm_Click
+	main_webview.LoadUrl("https://web.telegram.org/#/login")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_snpcht_Click
+	main_webview.LoadUrl("https://accounts.snapchat.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_soundcloud_Click
+	main_webview.LoadUrl("https://m.soundcloud.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_youtube_Click
+	main_webview.LoadUrl("https://m.youtube.com")
+	Panel_Intergration.Visible=False
+	btn_refresh.Visible=False
+	btn_refreshclose.Visible=True
+End Sub
+Sub btn_panel_intergration_hide_Click
+	Panel_Intergration.Visible=False
+End Sub
+Sub btn_extrasites_Click
+	main_webview.LoadUrl("file:///android_asset/index.html")
+	Panel_Intergration.Visible=False
+End Sub
+
+'PANEL_DOWNLOAD
+Sub btn_startdownload_Click
+	Try
+		If textbox_download_url.Text="" Then
+			ToastMessageShow("Please enter Site or Download URL",True)
+		Else
+			If Msgbox2("Are you sure that you have internet connection?"& CRLF & "If you do not currently, as soon as you get a connection it will start downloading."& CRLF & CRLF & "Once you start, you can't cancel downloading." & CRLF & CRLF & "Download Location : " &  File.DirRootExternal & "/Frigate/Download"& CRLF& CRLF &"Save File Name : " & textbox_download_url.Text & CRLF& CRLF &"Link : " & textbox_download_url.Text ,"INFO - Frigate Downloader","Start Download","","No",Null)=DialogResponse.POSITIVE Then
+				DownloaderService.DOWNLOAD_ADDRESS=textbox_download_url.Text
+				DownloaderService.DOWNLOAD_FILENAME=textbox_download_filename.Text
+				StartService(DownloaderService)
+		
+			Else
+			End If
+		End If
+		
+	Catch
+		Log(LastException)
+		ToastMessageShow("Download Error !",True)
+	End Try
+End Sub
+Sub btn_downloadbooster_panel_CheckedChange(Checked As Boolean)
+	If btn_downloadbooster_panel.Checked=True Then
+		ToastMessageShow("Download Booster - Network Booster Enabled",True)
+	Else
+		ToastMessageShow("Download Booster - Network Booster Disable",True)
+	End If
+End Sub
+Sub btn_hidedownloadpanel_Click
+	Panel_Downloader.Visible=False
+End Sub
+Sub btn_downloader_LongClick
+	
+	
+	If main_webview.Url.StartsWith("file:///") Then
+		ToastMessageShow("Cant Save / Download this URL!",True)
+		Else
+		textbox_download_url.Text=main_webview.Url
+		textbox_download_filename.Text=WebViewExtender.getTitle(main_webview)&".html"
+		Panel_Downloader.BringToFront
+		Panel_Downloader.Visible=True
+		Panel_Drawer.Visible=False
+	End If
+	
+End Sub
+
+
+'PANEL_SEARCH
+Sub btn_refresh_Click
+	main_webview.LoadUrl(main_webview.Url)
+	btn_refreshclose.Visible=True
+	btn_refresh.Visible=False
+End Sub
+Sub textbox_search_bar_EnterPressed
+	btn_refreshclose.Visible=True
+	btn_refresh.Visible=False
+	
+	
+	
+	If main_webview.Url.StartsWith("http://")  Then
+		main_webview.LoadURL(textbox_search_bar.Text)
+	Else
+		If main_webview.Url.StartsWith("https://")  Then
+			main_webview.LoadURL(textbox_search_bar.Text)
+		Else
+			main_webview.LoadUrl("http://www.google.com/#q=" & textbox_search_bar.Text)
+		End If
+				
+			
+		
+	End If
+End Sub
+Sub btn_search_Click
+	btn_refreshclose.Visible=True
+	btn_refresh.Visible=False
+	main_webview.LoadUrl(textbox_search_bar.Text)
+End Sub
+Sub btn_search_LongClick
+	Try
+		If main_webview.Url.StartsWith("http://") Then
+			Msgbox("Not Secure [ LEVEL - 50% - NO SSL ]"& CRLF & CRLF & main_webview.Url & CRLF & CRLF & WebViewExtender.getTitle(main_webview) & CRLF & CRLF & "HOST : " & WebViewExtender.getHost(main_webview),"Security Deatils")
+		End If
+		If main_webview.Url.StartsWith("https://") Then
+			Msgbox("Fully Secure [ LEVEL - 100% - SSL ]" & CRLF & CRLF & main_webview.Url & CRLF & CRLF & WebViewExtender.getTitle(main_webview) & CRLF & CRLF &"HOST : "& WebViewExtender.getHost(main_webview),"Security Deatils")
+		End If
+		If main_webview.Url.StartsWith("file:///") Then
+			Msgbox("In-App WebView : No details available","Security Deatils")
+		End If
+	Catch
+		Log(LastException)
+	End Try
+End Sub
+Sub btn_refreshclose_Click
+	main_webview.StopLoading
+	btn_refreshclose.Visible=False
+	btn_refresh.Visible=True
+End Sub
+Sub btn_urlplus_Click
+	textbox_search_bar.Text="http://"
+End Sub
+Sub btn_urlplus_LongClick
+	Try
+		Dim urlpluscopy As BClipboard
+	textbox_search_bar.Text=urlpluscopy.getText
+	Catch
+		Log(LastException)
+	End Try
+	
+End Sub
+
+'PANEL_FULLSCREEN
+Sub btn_fullscreen_back_Click
+	WebView_ReadingFullScreen_Mode.Back
+End Sub
+Sub btn_fullscreen_fowrd_Click
+	WebView_ReadingFullScreen_Mode.Forward
+End Sub
+Sub btn_fullscreenreadingmode_exit_Click
+	Panel_WebView_ReadingFullScreen_Mode.Visible=False
+	main_webview.LoadUrl(WebView_ReadingFullScreen_Mode.Url)
+End Sub
+
+'WEBVIEW
+Sub activity_KeyPress(KeyCode As Int) As Boolean
+	Select KeyCode
+		Case KeyCodes.KEYCODE_BACK:
+			page_back
+			Return True
+	End Select
+End Sub
+Sub page_back
+	main_webview.Back
+End Sub
+Sub main_webview_OverrideUrl (Url As String) As Boolean
+	btn_refreshclose.Visible=True
+	btn_refresh.Visible=False
+	
+	'If Url.EndsWith(".doc") Or Url.EndsWith(".docx") Or Url.EndsWith(".exe") Or Url.EndsWith(".log") Or Url.EndsWith(".msg") Or Url.StartsWith(".odt") Or Url.StartsWith(".pages") Or Url.StartsWith(".rtf") Or Url.StartsWith(".tex") Or Url.StartsWith(".wpd") Or Url.StartsWith(".wps") Or Url.StartsWith(".csv") Or Url.StartsWith(".dat") Or Url.StartsWith(".ged") Or Url.StartsWith(".key") Or Url.StartsWith(".keychain") Or Url.StartsWith(".pps") Or Url.StartsWith(".ppt") Or Url.StartsWith(".pptx") Or Url.StartsWith(".sdf") Or Url.StartsWith(".tar") Or Url.StartsWith(".vcf") Or Url.StartsWith(".xml") Or Url.StartsWith(".aif") Or Url.StartsWith(".iif") Or Url.StartsWith(".m3u") Or Url.StartsWith(".m4a") Or Url.StartsWith(".mid") Or Url.StartsWith(".mp3") Or Url.StartsWith(".mpa") Or Url.StartsWith(".wav") Or Url.StartsWith(".wma") Or Url.StartsWith(".3g2") Or Url.StartsWith(".3gp") Or Url.StartsWith(".asf") Or Url.StartsWith(".avi") Or Url.StartsWith(".flv") Or Url.StartsWith(".m4a") Or Url.StartsWith(".mov") Or Url.StartsWith(".mpg") Or Url.StartsWith(".rm") Or  Url.StartsWith(".srt") Or  Url.StartsWith(".swf") Or Url.StartsWith(".vob") Or Url.StartsWith(".wmv") Or Url.StartsWith(".3dm") Or Url.StartsWith(".3ds") Or Url.StartsWith(".max") Or Url.StartsWith(".obj") Or Url.StartsWith(".bmp") Or Url.StartsWith(".dds") Or Url.StartsWith(".gif") Or Url.StartsWith(".jpg") Or Url.StartsWith(".png") Or Url.StartsWith(".psd") Or Url.StartsWith(".") Or  Url.StartsWith(".tga") Or Url.StartsWith(".tiff") Or Url.StartsWith(".apk") Or  Url.StartsWith(".jar") Or Url.StartsWith(".7z") Or  Url.StartsWith(".cbr") Or Url.StartsWith(".deb") Or Url.StartsWith(".gz") Or Url.StartsWith(".rar") Or Url.StartsWith(".sitx") Or  Url.StartsWith(".zip") Or  Url.StartsWith(".zipx") Or Url.StartsWith(".tar.gz") Or  Url.StartsWith(".bin") Or Url.StartsWith(".iso") Or  Url.StartsWith(".mdf") Or  Url.StartsWith(".toast") Or  Url.StartsWith(".torrent") Or  Url.StartsWith(".msi") Or  Url.StartsWith(".part")   Then
+	'	textbox_download_url.Text=Url
+	'	textbox_download_filename.Text=""
+	'	Panel_Downloader.Visible=True
+	'	Panel_Downloader.BringToFront
+	'Else
+	'	Return False
+	'End If
+	
+	If Url.StartsWith("http://") Or Url.StartsWith("https://") Then
+		textbox_download_url.Text=Url
+	End If
+	
+	
+	
+End Sub
+Sub main_webview_PageFinished (Url As String)
+	Try
+		textbox_search_bar.Text=main_webview.Url
+	textbox_search_bar.Hint=WebViewExtender.getTitle(main_webview)
+	btn_refreshclose.Visible=False
+	btn_refresh.Visible=True
+	If main_webview.Url.StartsWith("file:///") Then
+		textbox_search_bar.Hint="Welcome to Frigate Browser Premium"
+		textbox_search_bar.Text=""
+	End If
+	Catch
+		Log(LastException)
+	End Try
+	
+	Try
+		ListView_Settings_hostory.AddSingleLine( main_webview.Url)
+		File.WriteList(File.DirDefaultExternal,"history.txt",ListView_Settings_hostory)
+	Catch
+		Log(LastException)
+	End Try
+	
+End Sub
+
+'PANEL_SETTINGS
+Sub btn_pannelsettings_reset_Click
+	
+	
+	If Msgbox2("ITEMS : Cache, History"& CRLF & CRLF & "Are you Sure ?","READ CAREFULLY","Clear Now","","No",Null)=DialogResponse.POSITIVE Then
+		WebViewExtender.clearCache(main_webview,True)
+		WebViewExtender.clearCache(WebView_ReadingFullScreen_Mode,True)
+		WebViewExtender.clearFocus(main_webview)
+		WebViewExtender.clearFocus(WebView_ReadingFullScreen_Mode)
+		ListView_Settings_hostory.Clear
+		RadioButton_google.Checked=True
+		CheckBox_js.Checked=True
+		CheckBox_cookie.Checked=True
+		Try
+			Dim clcc As Reflector
+		clcc.Target=main_webview
+		clcc.RunMethod2("clearCache","False","java.lang.boolean")
+		Catch
+			Log(LastException)
+		End Try
+		
+	Else
+		RadioButton_google.Checked=True
+		CheckBox_js.Checked=True
+		CheckBox_cookie.Checked=True
+	End If
+End Sub
+Sub btn_settingspanel_okandhide_Click
+	Try		
+		If RadioButton_google.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"google.txt","1")
+			File.WriteString(File.DirDefaultExternal,"duck.txt","0")
+			File.WriteString(File.DirDefaultExternal,"duck.txt","0")
+			File.WriteString(File.DirDefaultExternal,"yahoo.txt","0")
+	Else
+		File.WriteString(File.DirDefaultExternal,"google.txt","0")
+	End If
+	If RadioButton_duck.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"duck.txt","1")
+			File.WriteString(File.DirDefaultExternal,"google.txt","0")
+			File.WriteString(File.DirDefaultExternal,"bing.txt","0")
+			File.WriteString(File.DirDefaultExternal,"yahoo.txt","0")
+	Else
+		File.WriteString(File.DirDefaultExternal,"duck.txt","0")
+	End If
+	If RadioButton_bing.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"bing.txt","1")
+			File.WriteString(File.DirDefaultExternal,"google.txt","0")
+			File.WriteString(File.DirDefaultExternal,"duck.txt","0")
+			File.WriteString(File.DirDefaultExternal,"yahoo.txt","0")
+	Else
+		File.WriteString(File.DirDefaultExternal,"bing.txt","0")
+	End If
+	If RadioButton_yahoo.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"yahoo.txt","1")
+			File.WriteString(File.DirDefaultExternal,"bing.txt","0")
+			File.WriteString(File.DirDefaultExternal,"google.txt","0")
+			File.WriteString(File.DirDefaultExternal,"duck.txt","0")
+	Else
+		File.WriteString(File.DirDefaultExternal,"yahoo.txt","0")
+	End If
+	
+	
+	
+	If CheckBox_savepass.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"savepass.txt","1")
+	Else
+		File.WriteString(File.DirDefaultExternal,"savepass.txt","0")
+	End If
+	If CheckBox_dnt.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"dnt.txt","1")
+	Else
+		File.WriteString(File.DirDefaultExternal,"dnt.txt","0")
+	End If
+	If CheckBox_js.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"js.txt","1")
+	Else
+		File.WriteString(File.DirDefaultExternal,"js.txt","0")
+	End If
+	If CheckBox_boostmode.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"boostr.txt","1")
+	Else
+		File.WriteString(File.DirDefaultExternal,"boostr.txt","0")
+	End If
+	If CheckBox_cookie.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"cookie.txt","1")
+	Else
+		File.WriteString(File.DirDefaultExternal,"cookie.txt","0")
+	End If
+	If CheckBox_safesearch.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"sfsearch.txt","1")
+	Else
+		File.WriteString(File.DirDefaultExternal,"sfsearch.txt","0")
+	End If
+	
+	If CheckBox_applock_enable.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"pscodecheck.txt","1")
+	Else
+			File.WriteString(File.DirDefaultExternal,"pscodecheck.txt","0")
+	End If
+	Catch
+		ToastMessageShow("Settings Save Error !",True)
+		Log(LastException)
+	End Try
+	
+	Panel_Main_Settings.Visible=False
+End Sub
+
+'SETTINGS_HISTORY
+Sub Button_history_Click
+	Panel_Settings_History.BringToFront
+	Panel_Settings_History.Visible=True
+	Button_applock.Visible=False
+	Button_history.Visible=False
+	btn_pannelsettings_reset.Visible=False
+	btn_settingspanel_okandhide.Visible=False
+End Sub
+Sub btn_history_hide_Click
+	Panel_Settings_History.Visible=False
+	Button_applock.Visible=True
+	Button_history.Visible=True
+	btn_pannelsettings_reset.Visible=True
+	btn_settingspanel_okandhide.Visible=True
+End Sub
+Sub ListView_Settings_hostory_ItemClick (Position As Int, Value As Object)
+	ToastMessageShow("Long tap to open URL",True)
+End Sub
+Sub ListView_Settings_hostory_ItemLongClick (Position As Int, Value As Object)
+	main_webview.LoadUrl(Value)
+	btn_refreshclose.Visible=True
+	btn_refresh.Visible=False
+	Panel_Settings_History.Visible=False
+	Panel_applock_settings.Visible=False
+	Panel_Main_Settings.Visible=False
+	Button_applock.Visible=True
+	Button_history.Visible=True
+	btn_pannelsettings_reset.Visible=True
+	btn_settingspanel_okandhide.Visible=True
+End Sub
+Sub btn_clearHistory_Click
+	Try
+		If Msgbox2("Permanent Delete History"& CRLF & CRLF & "Are you Sure ?","READ CAREFULLY","Clear Now","","No",Null)=DialogResponse.POSITIVE Then
+		ListView_Settings_hostory.Clear
+		File.WriteList(File.DirDefaultExternal,"history.txt",ListView_Settings_hostory)
+	Else
+	End If
+	Catch
+		Log(LastException)
+	End Try
+	
+End Sub
+
+'PANEL_APPLOCK
+Sub Button_applock_Click
+	Panel_applock_settings.BringToFront
+	Panel_applock_settings.Visible=True
+	Button_applock.Visible=False
+	Button_history.Visible=False
+	btn_pannelsettings_reset.Visible=False
+	btn_settingspanel_okandhide.Visible=False
+End Sub
+Sub Txtbox_applock_text_EnterPressed
+	If Txtbox_applock_text.Text=File.ReadString(File.DirDefaultExternal,"pscode.txt") Then
+		Panel_App_Lock.Visible=False
+		Else
+		Txtbox_applock_text.Text=""
+		Txtbox_applock_text.Hint="Please try again !"
+	End If
+End Sub
+
+'SETTINGS_APPLOCK_SET_PASSWORD
+Sub btn_applocksave_Click	
+	If TextBox_applock_password_set.Text=Textbox_retype_passcodepleteEditText1.text Then
+		If CheckBox_applock_enable.Checked=True Then
+		File.WriteString(File.DirDefaultExternal,"pscode.txt",TextBox_applock_password_set.Text)
+			ToastMessageShow("Passcode Enabled" & CRLF & CRLF& "New Passcode : " &TextBox_applock_password_set.Text,True)
+	Else
+		File.WriteString(File.DirDefaultExternal,"pscode.txt","")
+		ToastMessageShow("Passcode Disable",True)
+	End If
+	Panel_applock_settings.Visible=False
+	Button_applock.Visible=True
+		Button_history.Visible=True
+	btn_pannelsettings_reset.Visible=True
+	btn_settingspanel_okandhide.Visible=True
+	Else
+		ToastMessageShow("Please check Passcode !",True)
+	End If
+	
+End Sub
+
+Sub btn_password_panelHide_Click
+	Panel_applock_settings.Visible=False
+	Button_applock.Visible=True
+	Button_history.Visible=True
+	btn_pannelsettings_reset.Visible=True
+	btn_settingspanel_okandhide.Visible=True
+End Sub
+
+Sub Txtbox_applock_text_TextChanged (Old As String, New As String)
+	If Txtbox_applock_text.Text=File.ReadString(File.DirDefaultExternal,"pscode.txt") Then
+		Panel_App_Lock.Visible=False
+	Else
+		Txtbox_applock_text.Text=""
+		Txtbox_applock_text.Hint="Please try again !"
+	End If
+End Sub

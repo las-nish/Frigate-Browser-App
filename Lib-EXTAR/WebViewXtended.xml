@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.01</doclet-version-NOT-library-version>
+    <class>
+        <name>thalmy.webviewxtended.xtender</name>
+        <shortname>WebViewXtender</shortname>
+        <owner>process</owner>
+        <method>
+            <name>setScrollBarStyle</name>
+            <comment>Specify the style of the scrollbars. The scrollbars can be overlaid or inset. When inset, they add to the padding of the view. 
+And the scrollbars can be drawn inside the padding area or on the edge of the view. For example, if a view has a background 
+drawable and you want to draw the scrollbars inside the padding specified by the drawable, you can use SCROLLBARS_INSIDE_OVERLAY 
+or SCROLLBARS_INSIDE_INSET. If you want them to appear at the edge of the view, ignoring the padding, then you can use 
+SCROLLBARS_OUTSIDE_OVERLAY or SCROLLBARS_OUTSIDE_INSET.
+
+Allowed int values for style are:
+0 = SCROLLBARS_INSIDE_OVERLAY 
+16777216  = SCROLLBARS_INSIDE_INSET
+33554432 = SCROLLBARS_OUTSIDE_OVERLAY
+50331648 = SCROLLBARS_OUTSIDE_INSET
+
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim intStyle as Int
+intStyle = 16777216 '(iE for SCROLLBARS_INSIDE_INSET)
+wvXtender.setScrollBarStyle(webView1, intStyle)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>style</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>setVerticalScrollBarEnabled</name>
+            <comment>Define whether the vertical scrollbar should be drawn or not. The scrollbar is not drawn by default.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolEnabled as Boolean
+bolEanbled = True
+wvXtender.setVerticalScrollBarEnabled(webView1, bolEanbled)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>flag</name>
+                <type>java.lang.Boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>canZoomOut</name>
+            <comment>Returns TRUE if the WebView can be zoomed out
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolZoomIn as Boolean
+bolZoomIn = wvXtender.canZoomOut(webView1)
+&lt;/code&gt;</comment>
+            <returntype>java.lang.Boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getFaviconFromUrl</name>
+            <comment>Get the favicon...if available and returns a bitmap, else return default bitmap
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bmpFI As Bitmap
+Dim strURL as String
+strURL = "http://www.blick.ch"
+bmpDefault.Initialize(File.DirAssets ,"defaultfavicon.png")
+bmpFI.Initialize3(wvXtender.getFaviconFromUrl(strURL, bmpDefault))
+
+OR after page loading is finished:
+
+Sub webView1_PageFinished (Url As String)
+
+	bmpFI.Initialize3(wvXtender.getFaviconFromUrl(Url, bmpDefault))
+	Imageview1.Bitmap = bmpFI
+
+End Sub
+
+&lt;/code&gt;</comment>
+            <returntype>android.graphics.Bitmap</returntype>
+            <parameter>
+                <name>siteUrl</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>bmpDefault</name>
+                <type>android.graphics.Bitmap</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getJavaScriptEnabled</name>
+            <comment>Get the state if JavaScript is enabled in the WebView. Returns TRUE if so.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolJS As Boolean
+bolJS = wvXtender.getJavaScriptEnabled(webView1)&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>setInitialScale</name>
+            <comment>Set the initial scale in percent for the WebView. 0 means default. If initial scale is greater than 0, WebView starts with this value as 
+initial scale. Please note that unlike the scale properties in the viewport meta tag, this method doesn't take the screen density 
+into account.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.setInitialScale (webView1, 10)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>scaleInPercent</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getScale</name>
+            <comment>Returns the current scale of the WebView.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim flScale as Float
+flScale = wvXtender.getScale(webView1)
+&lt;/code&gt;</comment>
+            <returntype>float</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getPluginState</name>
+            <comment>Get the state of the PlugIns. Returns a string with the actual state: OFF, ON or ON_DEMAND.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim strPS As String
+strPS = wvXtender.getPluginState(webView1)&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getScrollX</name>
+            <comment>Return the scrolled left position of this view. This is the left edge of the displayed part of your view. 
+You do not need to draw any pixels farther left, since those are outside of the frame of your view on screen
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim intLeftEdge as int
+intLeftEdge = wvXtender.getScrollX(webView1)
+&lt;/code&gt;</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getTitle</name>
+            <comment>Get the title for the current page. This is the title of the current page.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim strCurrTitle as String
+strCurrTitle = wvXtender.getTitle(webView1)
+&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getScrollY</name>
+            <comment>Return the scrolled top position of this view. This is the top edge of the displayed part of your view. You do not need 
+to draw any pixels above it, since those are outside of the frame of your view on screen.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim intTopEdge as int
+intTopEdge = wvXtender.getScrollY(webView1)
+&lt;/code&gt;</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>setAcceptCookie</name>
+            <comment>Set the state of Cookies beeing accepted or not. Use TRUE if you want accept Cookies in the WebView or FALSE if not.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.setAcceptCookie(webView1, false)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>flag</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getLoadsImagesAutomatically</name>
+            <comment>Get the state if images are loaded automatically. Returns TRUE if so.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolLoadAuto As Boolean
+bolLoadAuto = wvXtender.getLoadsImagesAutomatically(webView1)&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>setHorizontalScrollBarEnabled</name>
+            <comment>Define whether the horizontal scrollbar should be drawn or not. The scrollbar is not drawn by default.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolEnabled as Boolean
+bolEanbled = True
+wvXtender.setHorizontalScrollBarEnabled(webView1, bolEanbled)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>flag</name>
+                <type>java.lang.Boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>pageUp</name>
+            <comment>Scroll the contents of the view up by half the view size. Boolean TRUE = scrolls to the top. 
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.pageUp(webView1, false)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>flag</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>zoomOut</name>
+            <comment>Perform zoom out in the webview. Return TRUE if zoom out succeeds. FALSE if no zoom changes. 
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+dim bolZoomOut as Boolean
+bolZoomOut = wvXtender.zoomOut(webView1)
+&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>clearCache</name>
+            <comment>Clears the cache. Boolean include disk files.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.clearCache(webView1, TRUE)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>flag</name>
+                <type>java.lang.Boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>scrollBy</name>
+            <comment>Move the scrolled position of your view in given x and y positions as int values. 
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.scrollBy(webView1, 20,50)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>x</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>y</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>clearFocus</name>
+            <comment>Removes the focus of an given view (EditText, Button...)
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.clearFocus(WebView1)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>vGivenView</name>
+                <type>android.view.View</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getAcceptCookie</name>
+            <comment>Get the state of Cookies beeing accepted or not. Returns TRUE if Cookies are accept or FALSE if not.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolCK as Boolean
+bolCK = wvXtender.getAcceptCookie(webView1)&lt;/code&gt;</comment>
+            <returntype>java.lang.Boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>isVerticalScrollBarEnabled</name>
+            <comment>Indicate whether the vertical scrollbar should be drawn or not. The scrollbar is not drawn by default.
+Returns true if the vertical scrollbar should be painted, false otherwise
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolEnabled as Boolean
+bolEnabled = wvXtender.isVerticalScrollBarEnabled(webView1)
+&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getProgress</name>
+            <comment>Get the progress for the current page between 0 and 100. May use it with a timer.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim intProgr as Int
+wvXtender.getProgress(webView1)
+&lt;/code&gt;</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getHost</name>
+            <comment>Get the host name of the current page. 
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim strCurrHost as String
+Dim strURL as String
+strURL = "http://www.blick.ch" 
+strCurrHost = wvXtender.getHost(strURL)
+&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>siteUrl</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>scrollTo</name>
+            <comment>Set the scrolled position of your view in given x and y positions as int values. 
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.scrollTo(webView1, 20,50)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>x</name>
+                <type>int</type>
+            </parameter>
+            <parameter>
+                <name>y</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>setLoadsImagesAutomatically</name>
+            <comment>Set the state if images are loaded automatically. Use FALSE if you do not want to load images in the WebView.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.setLoadsImagesAutomatically(webView1, false)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>flag</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>resumeTimers</name>
+            <comment>Resume all layout, parsing, and JavaScript timers for all webviews. This will resume dispatching all timers. 
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.resumeTimers(webView1)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getFaviconFromUrl2</name>
+            <comment>Get the favicon of current page...if available and returns a bitmap, else return default bitmap
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bmpFI As Bitmap
+Dim strURL as String
+strURL = "http://www.blick.ch"
+bmpFI.Initialize3(wvXtender.getFaviconFromUrl(strURL))
+
+OR after page loading is finished:
+
+Sub webView1_PageFinished (Url As String)
+
+	bmpFI.Initialize3(wvXtender.getFaviconFromUrl2(Url))
+	Imageview1.Bitmap = bmpFI
+	End If
+End Sub
+
+&lt;/code&gt;</comment>
+            <returntype>android.graphics.Bitmap</returntype>
+            <parameter>
+                <name>siteUrl</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>isHorizontalScrollBarEnabled</name>
+            <comment>Indicate whether the horizontal scrollbar should be drawn or not. The scrollbar is not drawn by default.
+Returns true if the horizontal scrollbar should be painted, false otherwise
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolEnabled as Boolean
+bolEnabled = wvXtender.isHorizontalScrollBarEnabled(webView1)
+&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>canZoomIn</name>
+            <comment>Returns TRUE if the WebView can be zoomed in
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim bolZoomIn as Boolean
+bolZoomIn = wvXtender.canZoomIn(webView1)
+&lt;/code&gt;</comment>
+            <returntype>java.lang.Boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>zoomIn</name>
+            <comment>Perform zoom in in the webview. Return TRUE if zoom in succeeds. FALSE if no zoom changes. 
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+dim bolZoomIn as Boolean
+bolZoomIn = wvXtender.zoomIn(webView1)
+&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>setJavaScriptEnabled</name>
+            <comment>Enables or disables JavaScript in the WebView. Use FALSE if you do not want to enable JavaScript or TRUE to enable.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.setJavaScriptEnabled(webView1, false)&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>flag</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>pageDown</name>
+            <comment>Scroll the contents of the view down by half the page size. Boolean TRUE = scrolls to the bottom. 
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+wvXtender.pageDown(webView1, true)
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>flag</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>getOriginalUrl</name>
+            <comment>Get the original url for the current page. This is not always the same as the url passed to WebViewClient.onPageStarted because 
+although the load for that url has begun, the current page may not have changed. Also, there may have been redirects resulting in 
+a different url to that originally requested.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim strOrigURL as String
+strOrigURL = wvXtender.getOriginalUrl(webView1)
+&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+        </method>
+        <method>
+            <name>setPluginState</name>
+            <comment>Set the state of PlugIns. Use a string with ON, OFF or ON_DEMAND, depending what you like to have in the WebView.
+Example:&lt;code&gt;
+Dim wvXtender As WebViewXtender
+Dim strPS As String
+strPS = "OFF"
+wvXtender.setPluginState(webView1, strPS)
+You can also write direct the value without a string variable:
+wvXtender.setPluginState(webView1, "ON_DEMAND")
+&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>webView1</name>
+                <type>android.webkit.WebView</type>
+            </parameter>
+            <parameter>
+                <name>state</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+    </class>
+    <version>1.5</version>
+    <author>Ren\u00e9 Thalmann</author>
+</root>

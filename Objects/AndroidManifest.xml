@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.clenontec.webbrowser"
+	android:versionCode="1"
+	android:versionName="Frigate One Tab Browser v1"
+	android:installLocation="preferExternal">
+	
+	<uses-sdk android:minSdkVersion="22" android:targetSdkVersion="29"/>
+	<supports-screens android:largeScreens="true" 
+	    android:normalScreens="true" 
+	    android:smallScreens="true" 
+	    android:anyDensity="true"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+	<uses-permission android:name="android.permission.WAKE_LOCK"/>
+	<uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<application
+		android:icon="@drawable/icon"
+		android:label="Frigate Browser"
+		android:largeHeap="True"
+		android:theme="@style/LightTheme">
+		
+		<provider
+		  android:name="android.support.v4.content.FileProvider"
+		  android:authorities="com.clenontec.webbrowser.provider"
+		  android:exported="false"
+		  android:grantUriPermissions="true">
+		  <meta-data
+		  android:name="android.support.FILE_PROVIDER_PATHS"
+		  android:resource="@xml/provider_paths"/>
+		  </provider>
+		<activity
+			android:windowSoftInputMode="stateHidden"
+			android:launchMode="singleTop"
+			android:name=".main"
+			android:label="Frigate Browser"
+			android:screenOrientation="portrait"
+			android:hardwareAccelerated="True"
+			android:configChanges="orientation|keyboardHidden|screenSize">
+			<intent-filter>
+			   <action android:name="android.intent.action.MAIN" />
+			   <category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+			
+		</activity>
+		<service android:name=".starter">
+		</service>
+		<receiver android:name=".starter$starter_BR">
+		</receiver>
+		<service android:name=".downloaderservice">
+		</service>
+		<receiver android:name=".downloaderservice$downloaderservice_BR">
+		</receiver>
+	</application>
+</manifest>

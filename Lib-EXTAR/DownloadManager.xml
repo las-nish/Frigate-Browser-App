@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.02</doclet-version-NOT-library-version>
+    <class>
+        <name>uk.co.martinpearman.b4a.downloadmanager.RequestWrapper</name>
+        <shortname>DownloadManagerRequest</shortname>
+        <objectwrapper>android.app.DownloadManager.Request</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment>Initialize the Request object with the Uri of the file to be downloaded.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Uri1</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>AllowScanningByMediaScanner</name>
+            <comment>The file to be downloaded is to be scanned by MediaScanner.
+This method should be called before enqueue(Request) is called.
+
+Only available with Android API level 11+.</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>SetDestinationInExternalPublicDir</name>
+            <comment>Set the local destination for the downloaded file to a path within the public external storage directory.
+DirType - Documentation required... (Pass Null for default action).
+SubPath - The path within the external directory, including the destination filename.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>DirType</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>SubPath</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SetDestinationInExternalFilesDir</name>
+            <comment>Set the local destination for the downloaded file to a path within the application's external files directory.
+DirType - Documentation required... (Pass Null for default action).
+SubPath - The path within the external directory, including the destination filename.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>DirType</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>SubPath</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <method>
+            <name>AddRequestHeader</name>
+            <comment>Add an HTTP header to be included with the download request.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Header</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Value</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <property>
+            <name>DestinationUri</name>
+            <parameter>
+                <name>Uri1</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <comment>Set the local destination for the downloaded file.
+Must be a file Uri to a path on external storage, and the calling application must have the WRITE_EXTERNAL_STORAGE permission.
+
+By default, downloads are saved to a generated filename in the shared download cache and may be deleted by the system at any time to reclaim space.</comment>
+        </property>
+        <property>
+            <name>AllowedOverRoaming</name>
+            <parameter>
+                <name>Allow</name>
+                <type>boolean</type>
+            </parameter>
+            <comment>Set whether this download may proceed over a roaming connection.
+By default, roaming is allowed.</comment>
+        </property>
+        <property>
+            <name>Description</name>
+            <parameter>
+                <name>Description</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <comment>Set a description of this download, to be displayed in notifications (if enabled).</comment>
+        </property>
+        <property>
+            <name>AllowedNetworkTypes</name>
+            <parameter>
+                <name>Flags</name>
+                <type>int</type>
+            </parameter>
+            <comment>Restrict the types of networks over which this download may proceed.</comment>
+        </property>
+        <property>
+            <name>MimeType</name>
+            <parameter>
+                <name>MimeType</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <comment>Set the MIME content type of this download.</comment>
+        </property>
+        <property>
+            <name>VisibleInDownloadsUi</name>
+            <parameter>
+                <name>Visible</name>
+                <type>boolean</type>
+            </parameter>
+            <comment>Set whether this download should be displayed in the system's Downloads UI.</comment>
+        </property>
+        <property>
+            <name>NotificationVisibility</name>
+            <parameter>
+                <name>Visibility</name>
+                <type>int</type>
+            </parameter>
+            <comment>Control whether a system notification is posted by the download manager while this download is running or when it is completed.
+If enabled, the download manager posts notifications about downloads through the system NotificationManager.
+By default, a notification is shown only when the download is in progress.
+ 
+If set to VISIBILITY_HIDDEN, this requires the permission android.permission.DOWNLOAD_WITHOUT_NOTIFICATION.
+
+Only available with Android API level 11+.</comment>
+        </property>
+        <property>
+            <name>ShowRunningNotification</name>
+            <parameter>
+                <name>Visible</name>
+                <type>boolean</type>
+            </parameter>
+            <comment>Control whether a system notification is posted by the download manager while this download is running.
+If enabled, the download manager posts notifications about downloads through the system NotificationManager.
+By default, a notification is shown.
+If set to false, this requires the permission android.permission.DOWNLOAD_WITHOUT_NOTIFICATION.
+
+This method was deprecated in API level 11.</comment>
+        </property>
+        <property>
+            <name>Title</name>
+            <parameter>
+                <name>Title</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <comment>Set the title of this download, to be displayed in notifications (if enabled).</comment>
+        </property>
+        <property>
+            <name>AllowedOverMetered</name>
+            <parameter>
+                <name>Allow</name>
+                <type>boolean</type>
+            </parameter>
+            <comment>Set whether this download may proceed over a metered network connection.
+By default, metered networks are allowed.
+
+Only available with Android API level 16+.</comment>
+        </property>
+        <field>
+            <name>NETWORK_MOBILE</name>
+            <comment></comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>NETWORK_WIFI</name>
+            <comment></comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>VISIBILITY_VISIBLE_NOTIFY_COMPLETED</name>
+            <comment>This download is visible and shows in the notifications while in progress and after completion.
+ 
+Only available with Android API level 11+.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION</name>
+            <comment>This download shows in the notifications after completion ONLY.
+It is usable only with the DownloadManager AddCompletedDownload method.
+
+Only available with Android API level 12+.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>VISIBILITY_HIDDEN</name>
+            <comment>This download doesn't show in the UI or in the notifications.
+ 
+Only available with Android API level 11+.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>VISIBILITY_VISIBLE</name>
+            <comment>This download is visible but only shows in the notifications while it's in progress.
+ 
+Only available with Android API level 11+.</comment>
+            <returntype>int</returntype>
+        </field>
+    </class>
+    <class>
+        <name>uk.co.martinpearman.b4a.downloadmanager.QueryWrapper</name>
+        <shortname>DownloadManagerQuery</shortname>
+        <objectwrapper>android.app.DownloadManager.Query</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>Initialize</name>
+            <comment></comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>SetFilterByStatus</name>
+            <comment>Include only downloads with status matching any the given Status flags.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>Status</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SetFilterById</name>
+            <comment>Include only the download with the given DownloadId.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>DownloadId</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>SetFilterById2</name>
+            <comment>Include only the downloads with the given DownloadIds.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>DownloadIds</name>
+                <type>long[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+    </class>
+    <class>
+        <name>uk.co.martinpearman.b4a.downloadmanager.B4ADownloadManager</name>
+        <shortname>DownloadManager</shortname>
+        <owner>process</owner>
+        <event>DownloadComplete(DownloadId As Long)</event>
+        <event>NotificationClicked(DownloadIds() As Long)</event>
+        <permission>android.permission.INTERNET</permission>
+        <method>
+            <name>GetRecommendedMaxBytesOverMobile</name>
+            <comment>Returns recommended maximum size, in bytes, of downloads that may go over a mobile connection or Null if there's no recommended limit.
+The user will have the option to bypass this limit.
+
+Only available with Android API level 11+.</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+        </method>
+        <method>
+            <name>RegisterReceiver</name>
+            <comment>Registers a BroadcastReceiver to receive broadcasts for ACTION_DOWNLOAD_COMPLETE and ACTION_NOTIFICATION_CLICKED.
+DownloadManager will now raise events DownloadComplete(DownloadId As Long) and NotificationClicked(DownloadIds() As Long).
+Be sure to call the UnregisterReceiver method when your Activity exits or Service is destroyed to free system resources.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>EventName</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>UnregisterReceiver</name>
+            <comment>Unregister the BroadcastReceiver if it has been registered.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Remove2</name>
+            <comment>Cancels the downloads identified by DownloadIds and removes them from the download manager.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>DownloadIds</name>
+                <type>long[]</type>
+            </parameter>
+        </method>
+        <method>
+            <name>AddCompletedDownload</name>
+            <comment>Adds a file to the downloads database system, so it could appear in Downloads App (and thus become eligible for management by the Downloads App).
+ 
+It is helpful to make the file scanable by MediaScanner by setting the param IsMediaScannerScannable to true.
+It makes the file visible in media managing applications such as Gallery App, which could be a useful purpose of using this method.
+
+Only available with Android API level 12+.</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Title</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Description</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>IsMediaScannerScannable</name>
+                <type>boolean</type>
+            </parameter>
+            <parameter>
+                <name>MimeType</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Path</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>Length</name>
+                <type>long</type>
+            </parameter>
+            <parameter>
+                <name>ShowNotification</name>
+                <type>boolean</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Query</name>
+            <comment>Query the download manager about downloads that have been requested.
+ 
+Requires the SQL library to be enabled.</comment>
+            <returntype>anywheresoftware.b4a.sql.SQL.CursorWrapper</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Query1</name>
+                <type>android.app.DownloadManager.Query</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Remove</name>
+            <comment>Cancels the download identified by DownloadId and removes it from the download manager.</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>DownloadId</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetMimeTypeForDownloadedFile</name>
+            <comment>Get the mime type of the download identified by DownloadId.
+
+Only available with Android API level 11+.</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>DownloadId</name>
+                <type>long</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetMaxBytesOverMobile</name>
+            <comment>Returns maximum size, in bytes, of downloads that may go over a mobile connection or Null if there is no limit.
+ 
+Only available with Android API level 11+.</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+        </method>
+        <method>
+            <name>RenameFile</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>SourcePath</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>SourceFilename</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>DestinationPath</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>DestinationFilename</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Enqueue</name>
+            <comment>Enqueue a new download.
+The download will start automatically once the download manager is ready to execute it and connectivity is available.
+ 
+Returns a DownloadId for the download entry added to the downloads app, unique across the system.
+This DownloadId is used to make future calls related to this download.</comment>
+            <returntype>long</returntype>
+            <parameter>
+                <name>pBA</name>
+                <type>anywheresoftware.b4a.BA</type>
+            </parameter>
+            <parameter>
+                <name>Request1</name>
+                <type>android.app.DownloadManager.Request</type>
+            </parameter>
+        </method>
+        <field>
+            <name>ERROR_CANNOT_RESUME</name>
+            <comment>Value of COLUMN_REASON when some possibly transient error occurred but we cannot resume the download.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>COLUMN_BYTES_DOWNLOADED_SO_FAR</name>
+            <comment>Number of bytes downloaded so far.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>COLUMN_LAST_MODIFIED_TIMESTAMP</name>
+            <comment>Timestamp when the download was last modified in System.currentTimeMillis().</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>PAUSED_WAITING_FOR_NETWORK</name>
+            <comment>Value of COLUMN_REASON when the download is waiting for network connectivity to proceed.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>COLUMN_LOCAL_URI</name>
+            <comment>Uri where downloaded file will be stored.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>ERROR_FILE_ALREADY_EXISTS</name>
+            <comment>Value of COLUMN_REASON when the requested destination file already exists.
+(The DownloadManager will not overwrite an existing file).</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>ACTION_NOTIFICATION_CLICKED</name>
+            <comment>Broadcast intent action sent by the download manager when the user clicks on a running download,
+either from a system notification or from the downloads UI.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>COLUMN_MEDIAPROVIDER_URI</name>
+            <comment>The URI to the corresponding entry in MediaProvider for this downloaded entry.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>ERROR_UNKNOWN</name>
+            <comment>Value of COLUMN_ERROR_CODE when the download has completed with an error that doesn't fit under any other error code.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>COLUMN_TITLE</name>
+            <comment>The client-supplied title for this download.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>PAUSED_UNKNOWN</name>
+            <comment>Value of COLUMN_REASON when the download is paused for some other reason.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>COLUMN_ID</name>
+            <comment>An identifier for a particular download, unique across the system.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>EXTRA_NOTIFICATION_CLICK_DOWNLOAD_IDS</name>
+            <comment>When clicks on multiple notifications are received, the following provides
+an array of download ids corresponding to the download notifications that were clicked.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>ERROR_DEVICE_NOT_FOUND</name>
+            <comment>Value of COLUMN_REASON when no external storage device was found.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>ERROR_HTTP_DATA_ERROR</name>
+            <comment>Value of COLUMN_REASON when an error receiving or processing data occurred at the HTTP level.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>ERROR_TOO_MANY_REDIRECTS</name>
+            <comment>Value of COLUMN_REASON when there were too many redirects.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>STATUS_SUCCESSFUL</name>
+            <comment>Value of COLUMN_STATUS when the download has successfully completed.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>COLUMN_DESCRIPTION</name>
+            <comment>The client-supplied description of this download.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>COLUMN_LOCAL_FILENAME</name>
+            <comment>The pathname of the file where the download is stored.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>PAUSED_QUEUED_FOR_WIFI</name>
+            <comment>Value of COLUMN_REASON when the download exceeds a size limit for downloads
+over the mobile network and the download manager is waiting for a Wi-Fi connection to proceed.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>ERROR_FILE_ERROR</name>
+            <comment>Value of COLUMN_REASON when a storage issue arises which doesn't fit under any other error code.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>STATUS_PENDING</name>
+            <comment>Value of COLUMN_STATUS when the download is waiting to start.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>ACTION_DOWNLOAD_COMPLETE</name>
+            <comment>Broadcast intent action sent by the download manager when a download completes.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>STATUS_RUNNING</name>
+            <comment>Value of COLUMN_STATUS when the download is currently running.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>COLUMN_URI</name>
+            <comment>URI to be downloaded.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>COLUMN_TOTAL_SIZE_BYTES</name>
+            <comment>Total size of the download in bytes.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>COLUMN_STATUS</name>
+            <comment>Current status of the download, as one of the STATUS_* constants.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>ERROR_UNHANDLED_HTTP_CODE</name>
+            <comment>Value of COLUMN_REASON when an HTTP code was received that download manager can't handle.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>PAUSED_WAITING_TO_RETRY</name>
+            <comment>Value of COLUMN_REASON when the download is paused because some network error occurred
+and the download manager is waiting before retrying the request.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>COLUMN_REASON</name>
+            <comment>Provides more detail on the status of the download.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>ERROR_INSUFFICIENT_SPACE</name>
+            <comment>Value of COLUMN_REASON when there was insufficient storage space.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>INTENT_EXTRAS_SORT_BY_SIZE</name>
+            <comment>Intent extra included with ACTION_VIEW_DOWNLOADS to start DownloadApp in sort-by-size mode.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>STATUS_FAILED</name>
+            <comment>Value of COLUMN_STATUS when the download has failed (and will not be retried).</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>EXTRA_DOWNLOAD_ID</name>
+            <comment>Intent extra included with ACTION_DOWNLOAD_COMPLETE intents,
+indicating the ID (as a long) of the download that just completed.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>COLUMN_MEDIA_TYPE</name>
+            <comment>Internet Media Type of the downloaded file.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>STATUS_PAUSED</name>
+            <comment>Value of COLUMN_STATUS when the download is waiting to retry or resume.</comment>
+            <returntype>int</returntype>
+        </field>
+        <field>
+            <name>ACTION_VIEW_DOWNLOADS</name>
+            <comment>Intent action to launch an activity to display all downloads.</comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+    </class>
+    <version>1.01</version>
+    <comment>The download manager is a system service that handles long-running HTTP downloads.
+Clients may request that a URI be downloaded to a particular destination file.
+The download manager will conduct the download in the background,
+taking care of HTTP interactions and retrying downloads after failures or across connectivity changes and system reboots.
+
+Apps that request downloads through this API should register a broadcast receiver for
+ACTION_NOTIFICATION_CLICKED to appropriately handle when the user clicks on a running download in a notification or from the downloads UI.
+Note that the application must have the INTERNET permission to use this class.
+
+DownloadManager is only available with Android API level 9+.</comment>
+    <author>Martin Pearman</author>
+</root>
